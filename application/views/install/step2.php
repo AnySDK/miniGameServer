@@ -52,6 +52,6 @@
                 </form>
 	</div>
 </div>
-
+<div style="text-align: right;padding: 10px;"><img src="../../statics/img/powered-by-AnySDK.png"></div>
 </body>
 </html>

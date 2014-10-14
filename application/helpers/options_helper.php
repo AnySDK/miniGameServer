@@ -63,12 +63,11 @@ function option () {
  * @return mixed 
  */
 function settings ($name = '') {
-        $settings_file = FCPATH . APPPATH . 'config/settings.json';
+        $settings_file = FCPATH . APPPATH . 'config/settings.php';
 
         // 清空文件状态缓存，对于 redirect 跳转之后配置还保持老配置的情况，这个操作似乎没用
         clearstatcache(true);
-        $settings_json = file_get_contents($settings_file);
-        $settings = json_decode($settings_json, true);
+        $settings = include $settings_file;
         
         if (empty($name)) {
                 return $settings;

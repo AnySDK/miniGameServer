@@ -150,7 +150,7 @@ class Install extends MY_Controller {
                 }
                 
                 // 检查配置文件是否可写
-                $settings_file = FCPATH.APPPATH . 'config' . DIRECTORY_SEPARATOR . 'settings.json';
+                $settings_file = FCPATH.APPPATH . 'config' . DIRECTORY_SEPARATOR . 'settings.php';
                 
                 if (is_writable($settings_file)) {
                         $settings_file_writable = true;
@@ -208,7 +208,7 @@ class Install extends MY_Controller {
          */
         private function step_post_3 () {
                 
-                $settings_file = FCPATH.APPPATH . 'config' . DIRECTORY_SEPARATOR . 'settings.json';
+                $settings_file = FCPATH.APPPATH . 'config' . DIRECTORY_SEPARATOR . 'settings.php';
                 
                 $setting_arr = settings();
                 
@@ -251,7 +251,7 @@ class Install extends MY_Controller {
                 $setting_arr['app_secret']            = $app_secret;
                 $setting_arr['install.lock']          = true;
                 
-                file_put_contents($settings_file, json_encode($setting_arr));
+                file_put_contents($settings_file, "<?php\nreturn " . var_export($setting_arr, true) . ';');
                 
                 $DB = $this->load->database($setting_arr['db_config'], TRUE);
                 if (!is_resource ($DB->conn_id)) {

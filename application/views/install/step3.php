@@ -121,7 +121,7 @@
                 </form>
 	</div>
 </div>
-
+<div style="text-align: right;padding: 10px;"><img src="../../statics/img/powered-by-AnySDK.png"></div>
 <script src="<?php echo site_url();?>statics/js/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script type="text/javascript">
         $(document).ready(function(){
