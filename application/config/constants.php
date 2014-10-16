@@ -41,5 +41,10 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
  */
 define('ANYSDK_PAY_KEY', 'anysdk_pay_key');
 
+/**
+ * 版本号
+ */
+define('MGS_VERSION', '1.0');
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

@@ -21,6 +21,8 @@ return array (
     'autoinit' => true,
     'stricton' => false,
   ),
+  'use_counter' => true,                // 统计计数器
+  'cid'         => 'c_1410161936_663',  // 随机生成的客户代码
   'anysdk_pay_key' => '',        // anysdk 分配的 private key
   'anysdk_login_url' => 'http://oauth.anysdk.com/api/User/LoginOauth/',
   'app_key' => '',              // 安装过程生成的app_key
