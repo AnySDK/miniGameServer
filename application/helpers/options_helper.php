@@ -64,15 +64,20 @@ function option () {
  */
 function settings ($name = '') {
         $settings_file = FCPATH . APPPATH . 'config/settings.php';
+        $settings_file_sample = FCPATH . APPPATH . 'config/settings.sample.php';
+        $config_dir = FCPATH . APPPATH . 'config/';
 
-        if (!file_exists($settings_file)) {
-                $settings_file_sample = FCPATH . APPPATH . 'config/settings.sample.php';
+        if (!file_exists($settings_file) && is_writable($config_dir)) {
                 @copy($settings_file_sample, $settings_file);
         }
         
         // 清空文件状态缓存，对于 redirect 跳转之后配置还保持老配置的情况，这个操作似乎没用
         clearstatcache(true);
-        $settings = include $settings_file;
+        if (file_exists($settings_file)) {
+                $settings = include $settings_file;
+        } else {
+                $settings = include $settings_file_sample;
+        }
         
         if (empty($name)) {
                 return $settings;
