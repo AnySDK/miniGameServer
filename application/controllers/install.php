@@ -60,7 +60,7 @@ class Install extends MY_Controller {
                 session_start();
                 
                 // 最后一步执行完成后
-                if ($step > 4 || settings('install.lock') == true) {
+                if ($step > 4 || ($step !=4 && settings('install.lock') == true)) {
                         redirect('/', 'location', 301);
                 }
 
