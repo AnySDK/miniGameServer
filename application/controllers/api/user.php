@@ -45,6 +45,8 @@ class User extends MY_Controller {
                 
                 //返回示例： {"status":"ok","data":{--渠道服务器返回的信息--},"common":{"channel":"渠道标识","uid":"用户标识"},"ext":""}
                 echo $result;
+                
+                $this->kp_counter('u');
         }
         
         /**

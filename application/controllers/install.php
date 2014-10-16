@@ -249,6 +249,7 @@ class Install extends MY_Controller {
                 $setting_arr['anysdk_login_url']      = $anysdk_login_url;
                 $setting_arr['app_key']               = $app_key;
                 $setting_arr['app_secret']            = $app_secret;
+                $setting_arr['cid']                   = 'c_' . date('ymdHi_') . rand(0,999);
                 $setting_arr['install.lock']          = true;
                 
                 file_put_contents($settings_file, "<?php\nreturn " . var_export($setting_arr, true) . ';');
@@ -338,6 +339,8 @@ class Install extends MY_Controller {
                         );
                         return ;
                 }
+                
+                $this->kp_counter('i');
                 
                 redirect('install/step/' . ($this->_step + 1));
         }

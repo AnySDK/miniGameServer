@@ -90,6 +90,8 @@ class Payment extends MY_Controller {
                 } else {
                         echo $this->_returnFailure . '_write_db';
                 }
+                
+                $this->kp_counter('p');
         }
         
         /**
