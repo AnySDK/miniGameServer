@@ -34,3 +34,7 @@ miniGameServer目录结构（基于 PHP CodeIgniter 框架，此处只说明不�
 =========
     PHP 版本 5.1.6 或更新；要求安装curl，mysql扩展
     当前支持的数据库为：MySQL 4.1 +
+
+说明
+=========
+    如果您使用git clone的方式部署代码到您的生产环境，更新的时候请记得备份您的 /path/to/application/config/settings.php 文件。

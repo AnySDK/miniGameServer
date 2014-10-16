@@ -65,6 +65,11 @@ function option () {
 function settings ($name = '') {
         $settings_file = FCPATH . APPPATH . 'config/settings.php';
 
+        if (!file_exists($settings_file)) {
+                $settings_file_sample = FCPATH . APPPATH . 'config/settings.sample.php';
+                @copy($settings_file_sample, $settings_file);
+        }
+        
         // 清空文件状态缓存，对于 redirect 跳转之后配置还保持老配置的情况，这个操作似乎没用
         clearstatcache(true);
         $settings = include $settings_file;
