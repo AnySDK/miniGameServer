@@ -65,11 +65,13 @@ miniGameServer只适用于单机手机游戏在没有游戏服务器的情况下
 
 5.3、执行安装程序
 ------------
-打开浏览器，访问 http://{url:port}/[path/to/]install 进行安装。
+打开浏览器，访问 http://{url:port}/\[path/to/\]install 进行安装。
 
-    其中：
-    ｛url:port｝表示nginx虚拟主机的访问地址，即域名或ip地址（推荐使用ip地址，域名有被劫持的危险），若端口不是默认的80，则还需要加上端口号；
-     [path/to/] 表示相对于web根目录的子目录，以3.1的/var/www/html/mobgame 下的子目录 webapi为例，则地址是 http://{url:port}/webapi/install
+其中：
+
+{url:port｝表示nginx虚拟主机的访问地址，即域名或ip地址（推荐使用ip地址，域名有被劫持的危险），若端口不是默认的80，则还需要加上端口号；
+
+[path/to/] 表示相对于web根目录的子目录，以5.1的/var/www/html/mobgame 下的子目录 webapi为例，则地址是 http://{url:port}/webapi/install
 
 六、接口使用
 ===========
@@ -280,3 +282,75 @@ data参数解析：
 6.1和6.2的接口只需将相应的接口填写到AnySDK打包工具客户端-参数配置界面响应的输入框内。示例如下：
 
 ![api usage](statics/docimg/api-usage.png)
+
+附录A：查询订单签名算法
+==================
+
+    Md5(app_key+order_id+time) 不包含+号
+
+
+附录B：验证订单合法性 - 签名算法
+=========================
+此处需要使用到的app_secret是安装过程第三步的时候生成的app_secret。
+将接收到的参数的data部分内容，按key的字典序进行排序，然后将值value串接成字符串，加上app_secret再计算字符串的md5值，sign值不区分大小写，全部用小写字母。
+例如：
+原始的数据为
+
+    data[‘b’] = 2
+    data[‘c’] = 3
+    data[‘a’] = 1
+
+按字典序排序后
+
+    data[‘a’] = 1
+    data[‘b’] = 2
+    data[‘c’] = 3
+
+拼接后得到字符串：
+
+    sign_str = ‘123’
+
+计算md5：
+
+    md5(sign_str+app_secret)  #不包含+号
+
+计算得到的md5和接收到的sign值进行对比
+
+
+附录C：错误码
+==========
+
+<table style="border:1px solid #bfbfbf;text-align:left;">
+    <tr>
+        <th width="100px">错误码</th>
+        <th width="75px">错误描述</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>查询成功</td>
+    </tr>
+    <tr>
+        <td>100</td>
+        <td>订单不存在</td>
+    </tr>
+    <tr>
+        <td>101</td>
+        <td>order_id不能为空</td>
+    </tr>
+    <tr>
+        <td>102</td>
+        <td>时间超时</td>
+    </tr>
+    <tr>
+        <td>103</td>
+        <td>缺少签名sign</td>
+    </tr>
+    <tr>
+        <td>104</td>
+        <td>app_key无效</td>
+    </tr>
+    <tr>
+        <td>105</td>
+        <td>签名sign无效</td>
+    </tr>
+</table>
