@@ -42,6 +42,11 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('ANYSDK_PAY_KEY', 'anysdk_pay_key');
 
 /**
+ * AnySDK 增强密钥 在 options 表中的key
+ */
+define('ANYSDK_ENHANCED_KEY', 'anysdk_enhanced_key');
+
+/**
  * 版本号
  */
 define('MGS_VERSION', '1.0');

@@ -212,45 +212,48 @@ class Install extends MY_Controller {
                 
                 $setting_arr = settings();
                 
-                $db_host = $this->input->post('db_host');
-                $db_name = $this->input->post('db_name');
-                $db_user = $this->input->post('db_user');
-                $db_pass = $this->input->post('db_pass');
-                $table_prefix = $this->input->post('table_prefix');
-                $anysdk_pay_key = $this->input->post('anysdk_pay_key');
-                $anysdk_login_url = $this->input->post('anysdk_login_url');
-                $app_key = $this->input->post('app_key');
-                $app_secret = $this->input->post('app_secret');
+                $db_host                = $this->input->post('db_host');
+                $db_name                = $this->input->post('db_name');
+                $db_user                = $this->input->post('db_user');
+                $db_pass                = $this->input->post('db_pass');
+                $table_prefix           = $this->input->post('table_prefix');
+                $anysdk_pay_key         = $this->input->post('anysdk_pay_key');
+                $anysdk_enhanced_key    = $this->input->post('anysdk_enhanced_key');
+                $anysdk_login_url       = $this->input->post('anysdk_login_url');
+                $app_key                = $this->input->post('app_key');
+                $app_secret             = $this->input->post('app_secret');
                 
                 if (  empty($db_host) || empty($db_name)
                    || empty($db_user) || empty($db_pass)
                    || empty($anysdk_pay_key)) {
                         $_SESSION['install_error'] = '缺少必填字段';
                         $_SESSION['install_info'] = array(
-                            'db_host'           => $db_host,
-                            'db_name'           => $db_name,
-                            'db_user'           => $db_user,
-                            'db_pass'           => $db_pass,
-                            'table_prefix'      => $table_prefix,
-                            'anysdk_pay_key'    => $anysdk_pay_key,
-                            'anysdk_login_url'  => $anysdk_login_url,
-                            'app_key'           => $app_key,
-                            'app_secret'        => $app_secret
+                            'db_host'             => $db_host,
+                            'db_name'             => $db_name,
+                            'db_user'             => $db_user,
+                            'db_pass'             => $db_pass,
+                            'table_prefix'        => $table_prefix,
+                            'anysdk_pay_key'      => $anysdk_pay_key,
+                            'anysdk_enhanced_key' => $anysdk_enhanced_key,
+                            'anysdk_login_url'    => $anysdk_login_url,
+                            'app_key'             => $app_key,
+                            'app_secret'          => $app_secret
                         );
                         return ;
                 }
                 
-                $setting_arr['db_config']['hostname'] = $db_host;
-                $setting_arr['db_config']['username'] = $db_user;
-                $setting_arr['db_config']['password'] = $db_pass;
-                $setting_arr['db_config']['database'] = $db_name;
+                $setting_arr['db_config']['hostname']     = $db_host;
+                $setting_arr['db_config']['username']     = $db_user;
+                $setting_arr['db_config']['password']     = $db_pass;
+                $setting_arr['db_config']['database']     = $db_name;
                 $setting_arr['db_config']['table_prefix'] = $table_prefix;
-                $setting_arr['anysdk_pay_key']        = $anysdk_pay_key;
-                $setting_arr['anysdk_login_url']      = $anysdk_login_url;
-                $setting_arr['app_key']               = $app_key;
-                $setting_arr['app_secret']            = $app_secret;
-                $setting_arr['cid']                   = 'c_' . date('ymdHi_') . rand(0,999);
-                $setting_arr['install.lock']          = true;
+                $setting_arr['anysdk_pay_key']            = $anysdk_pay_key;
+                $setting_arr['anysdk_enhanced_key']       = $anysdk_enhanced_key;
+                $setting_arr['anysdk_login_url']          = $anysdk_login_url;
+                $setting_arr['app_key']                   = $app_key;
+                $setting_arr['app_secret']                = $app_secret;
+                $setting_arr['cid']                       = 'c_' . date('ymdHi_') . rand(0,999);
+                $setting_arr['install.lock']              = true;
                 
                 file_put_contents($settings_file, "<?php\nreturn " . var_export($setting_arr, true) . ';');
                 
@@ -258,15 +261,16 @@ class Install extends MY_Controller {
                 if (!is_resource ($DB->conn_id)) {
                         $_SESSION['install_error'] = '数据库连接失败，请检查您的参数是否正确';
                         $_SESSION['install_info'] = array(
-                            'db_host'           => $db_host,
-                            'db_name'           => $db_name,
-                            'db_user'           => $db_user,
-                            'db_pass'           => $db_pass,
-                            'table_prefix'      => $table_prefix,
-                            'anysdk_pay_key'    => $anysdk_pay_key,
-                            'anysdk_login_url'  => $anysdk_login_url,
-                            'app_key'           => $app_key,
-                            'app_secret'        => $app_secret
+                            'db_host'             => $db_host,
+                            'db_name'             => $db_name,
+                            'db_user'             => $db_user,
+                            'db_pass'             => $db_pass,
+                            'table_prefix'        => $table_prefix,
+                            'anysdk_pay_key'      => $anysdk_pay_key,
+                            'anysdk_enhanced_key' => $anysdk_enhanced_key,
+                            'anysdk_login_url'    => $anysdk_login_url,
+                            'app_key'             => $app_key,
+                            'app_secret'          => $app_secret
                         );
                         return ;
                 }
@@ -279,15 +283,16 @@ class Install extends MY_Controller {
                 if (!$this->dbutil->database_exists($db_name)) {
                         $_SESSION['install_error'] = '数据库不存在，您需要手动创建';
                         $_SESSION['install_info'] = array(
-                            'db_host'           => $db_host,
-                            'db_name'           => $db_name,
-                            'db_user'           => $db_user,
-                            'db_pass'           => $db_pass,
-                            'table_prefix'      => $table_prefix,
-                            'anysdk_pay_key'    => $anysdk_pay_key,
-                            'anysdk_login_url'  => $anysdk_login_url,
-                            'app_key'           => $app_key,
-                            'app_secret'        => $app_secret
+                            'db_host'             => $db_host,
+                            'db_name'             => $db_name,
+                            'db_user'             => $db_user,
+                            'db_pass'             => $db_pass,
+                            'table_prefix'        => $table_prefix,
+                            'anysdk_pay_key'      => $anysdk_pay_key,
+                            'anysdk_enhanced_key' => $anysdk_enhanced_key,
+                            'anysdk_login_url'    => $anysdk_login_url,
+                            'app_key'             => $app_key,
+                            'app_secret'          => $app_secret
                         );
                         return ;
                 }
@@ -327,15 +332,16 @@ class Install extends MY_Controller {
                 if (!$table_create_success) {
                         $_SESSION['install_error'] = '数据表 ' . $table_prefix . 'pay_notify' . ' 创建失败';
                         $_SESSION['install_info'] = array(
-                            'db_host'           => $db_host,
-                            'db_name'           => $db_name,
-                            'db_user'           => $db_user,
-                            'db_pass'           => $db_pass,
-                            'table_prefix'      => $table_prefix,
-                            'anysdk_pay_key'    => $anysdk_pay_key,
-                            'anysdk_login_url'  => $anysdk_login_url,
-                            'app_key'           => $app_key,
-                            'app_secret'        => $app_secret
+                            'db_host'             => $db_host,
+                            'db_name'             => $db_name,
+                            'db_user'             => $db_user,
+                            'db_pass'             => $db_pass,
+                            'table_prefix'        => $table_prefix,
+                            'anysdk_pay_key'      => $anysdk_pay_key,
+                            'anysdk_enhanced_key' => $anysdk_enhanced_key,
+                            'anysdk_login_url'    => $anysdk_login_url,
+                            'app_key'             => $app_key,
+                            'app_secret'          => $app_secret
                         );
                         return ;
                 }

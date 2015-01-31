@@ -95,6 +95,12 @@
                                         <span>AnySDK 提供的 PrivateKey 参数</span>
                                 </p>
                                 <p>
+                                        <label for="anysdk_enhanced_key">增强密钥</label>
+                                        <input type="text" name="anysdk_enhanced_key" id="anysdk_enhanced_key" value="<?php echo $info['anysdk_enhanced_key'];?>" placeholder="例如：MwM2MYEwN4ZTdkZGZDIT2ODETdk" />
+                                        <strong class="need_star"> * </strong>
+                                        <span>AnySDK 提供的 增强密钥 参数</span>
+                                </p>
+                                <p>
                                         <label for="anysdk_login_url">登录验证地址</label>
                                         <input type="text" name="anysdk_login_url" id="anysdk_login_url" value="<?php echo $info['anysdk_login_url'];?>" placeholder="例如：http://oauth.anysdk.com/api/User/LoginOauth/" />
                                         <strong class="need_star"> * </strong>
