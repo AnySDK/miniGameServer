@@ -49,7 +49,7 @@ define('ANYSDK_ENHANCED_KEY', 'anysdk_enhanced_key');
 /**
  * 版本号
  */
-define('MGS_VERSION', '1.0');
+define('MGS_VERSION', '1.1');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
