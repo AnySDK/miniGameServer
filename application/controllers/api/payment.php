@@ -42,6 +42,13 @@ class Payment extends MY_Controller {
                         return;
                 }
                 
+                // AnySDK 分配的 增强密钥
+                $enhancedKey = settings(ANYSDK_ENHANCED_KEY);
+                if (!$this->_checkEnhancedSign($params, $enhancedKey)) {
+                        echo $this->_returnFailure . '_check_enhanced_sign';
+                        return;
+                }
+                
                 // todo: 在这里加入其他处理逻辑
                 
                 // 删除除下列字段的其他字段， 下列字段是 2014年7月31日，AnySDK 文档中所支持的字段
@@ -214,5 +221,19 @@ class Payment extends MY_Controller {
                 $sign = md5($sign_str . $app_secret);
                 
                 return $sign;
+        }
+        
+        private function _checkEnhancedSign ($data, $enhancedKey) {
+                if (empty($data) || !isset($data['enhanced_sign']) || empty($enhancedKey)) {
+                        return false;
+                }
+                $enhancedSign = $data['enhanced_sign'];
+                //sign及enhanced_sign 不参与签名
+                unset($data['enhanced_sign']);
+                $_enhancedSign = $this->_getSign($data, $enhancedKey);
+                if ($_enhancedSign != $enhancedSign) {
+                        return false;
+                }
+                return true;
         }
 }
