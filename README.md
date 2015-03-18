@@ -60,7 +60,9 @@ miniGameServer只适用于单机手机游戏在没有游戏服务器的情况下
 
 ![rewriterules](statics/docimg/readme.md.rewriterules-2.png)
 
-假设web服务器是apache，以 /var/www/html/mobgame 为web根目录，程序不是上传到apache虚拟主机的web根目录，则需要修改程序目录下的.htaccess文件。例如，代码放在/var/www/html/mobgame/webapi/目录下，则index.php的路径为 /var/www/html/mobgame/webapi/index.php，参照下图修改程序目录下的.htaccess文件：
+假设web服务器是apache，以 /var/www/html/mobgame 为web根目录，程序不是上传到apache虚拟主机的web根目录，则需要修改程序目录下的.htaccess文件。
+
+例如，代码放在/var/www/html/mobgame/webapi/目录下，则index.php的路径为 /var/www/html/mobgame/webapi/index.php，参照下图修改程序目录下的.htaccess文件：
 
 ![rewriterules-for-apache](statics/docimg/readme.md.rewriterules-3.png)
 
