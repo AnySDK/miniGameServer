@@ -59,6 +59,10 @@ miniGameServer只适用于单机手机游戏在没有游戏服务器的情况下
 
 ![rewriterules](statics/docimg/readme.md.rewriterules-2.png)
 
+同理，在apache环境下，如果程序不是上传到apache虚拟主机的根目录，以 /var/www/html/mobgame 为web根目录，index.php的路径为 /var/www/html/mobgame/webapi/index.php，则需要修改程序目录下的.htaccess文件，如下图：
+
+![rewriterules-for-apache](statics/docimg/readme.md.rewriterules-3.png)
+
 5.2、安装MySQL，并创建数据库
 -----------------------
 单机游戏服务器端需要使用MySQL数据库，您需要在服务器上安装MySQL，并创建数据库，记录下MySQL的主机地址，用户名和密码（不能为空），创建好的数据库名，接下来的安装过程会需要这些参数。
