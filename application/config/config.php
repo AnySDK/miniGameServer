@@ -16,7 +16,9 @@
 */
 
 function doc_root_offset () {
-        $offset = trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', dirname(dirname(dirname(__FILE__)))), '\\/');
+        $file_path = str_replace("\\","/", dirname(dirname(dirname(__FILE__))));
+        
+        $offset = trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', $file_path), '\\/');
         
         return $offset ? $offset . '/': '';
 }

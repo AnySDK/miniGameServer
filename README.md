@@ -51,13 +51,20 @@ miniGameServer只适用于单机手机游戏在没有游戏服务器的情况下
 5.1、将代码上传到服务器
 ------------------
 代码需要上传到web服务器的根目录，如果web服务器是nginx，可以参照代码目录中的web-conf/nginx.conf来配置nginx的虚拟主机。
+
 假设以 /var/www/html/mobgame 为web根目录，将项目代码上传到此目录下，项目的index.php的路径应为 /var/www/html/mobgame/index.php ，此时nginx虚拟主机的urlrewrite规则为：
 
 ![rewriterules](statics/docimg/readme.md.rewriterules-1.png)
 
-如果程序不是上传到nginx虚拟主机的根目录，以 /var/www/html/mobgame 为web根目录，index.php的路径为 /var/www/html/mobgame/webapi/index.php，则使用如下urlrewrite规则：
+假设程序不是上传到nginx虚拟主机的根目录，则需要修改nginx配置文件的url rewrite规则。例如：以 /var/www/html/mobgame 为web根目录，代码放在/var/www/html/mobgame/webapi/目录下（则index.php的路径为 /var/www/html/mobgame/webapi/index.php），则使用如下urlrewrite规则：
 
 ![rewriterules](statics/docimg/readme.md.rewriterules-2.png)
+
+假设web服务器是apache，以 /var/www/html/mobgame 为web根目录，程序不是上传到apache虚拟主机的web根目录，则需要修改程序目录下的.htaccess文件。
+
+例如，代码放在/var/www/html/mobgame/webapi/目录下，则index.php的路径为 /var/www/html/mobgame/webapi/index.php，参照下图修改程序目录下的.htaccess文件：
+
+![rewriterules-for-apache](statics/docimg/readme.md.rewriterules-3.png)
 
 5.2、安装MySQL，并创建数据库
 -----------------------
