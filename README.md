@@ -79,13 +79,13 @@ miniGameServer只适用于单机手机游戏在没有游戏服务器的情况下
 --------------
 打开浏览器，访问 http://{url:port}/\[path/to/\]install 进行安装。
 
-**注意：**若安装过程中出现为配置文件（/path/to/application/config/settings.php）赋予写权限失败的情况，请检查是否是SELinux限制了PHP的读写权限。
-
-其中：
+**其中：**
 
 {url:port｝表示nginx虚拟主机的访问地址，即域名或ip地址（推荐使用ip地址，域名有被劫持的危险），若端口不是默认的80，则还需要加上端口号；
 
 [path/to/] 表示相对于web根目录的子目录，以5.1的/var/www/html/mobgame 下的子目录 webapi为例，则地址是 http://{url:port}/webapi/install
+
+**注意：**若安装过程中出现为配置文件（/path/to/application/config/settings.php）赋予写权限失败的情况，请检查是否是SELinux限制了PHP的读写权限。
 
 六、接口使用
 ===========
