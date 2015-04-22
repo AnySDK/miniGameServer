@@ -50,6 +50,9 @@ miniGameServer只适用于单机手机游戏在没有游戏服务器的情况下
 ================
 5.1、将代码上传到服务器
 ------------------
+
+**nginx**
+
 代码需要上传到web服务器的根目录，如果web服务器是nginx，可以参照代码目录中的web-conf/nginx.conf来配置nginx的虚拟主机。
 
 假设以 /var/www/html/mobgame 为web根目录，将项目代码上传到此目录下，项目的index.php的路径应为 /var/www/html/mobgame/index.php ，此时nginx虚拟主机的urlrewrite规则为：
@@ -60,7 +63,9 @@ miniGameServer只适用于单机手机游戏在没有游戏服务器的情况下
 
 ![rewriterules](statics/docimg/readme.md.rewriterules-2.png)
 
-假设web服务器是apache，以 /var/www/html/mobgame 为web根目录，程序不是上传到apache虚拟主机的web根目录，则需要修改程序目录下的.htaccess文件。
+**apache**
+
+假设web服务器是apache，以 /var/www/html/mobgame 为web根目录，程序不是上传到apache虚拟主机的web根目录，则需要修改程序目录下的.htaccess文件。为了使UrlRewrite配置生效，您可能需要将apache配置文件中对应目录或者对应虚拟主机的`AllowOverride`从`None`改为`All`。
 
 例如，代码放在/var/www/html/mobgame/webapi/目录下，则index.php的路径为 /var/www/html/mobgame/webapi/index.php，参照下图修改程序目录下的.htaccess文件：
 
@@ -74,11 +79,13 @@ miniGameServer只适用于单机手机游戏在没有游戏服务器的情况下
 --------------
 打开浏览器，访问 http://{url:port}/\[path/to/\]install 进行安装。
 
-其中：
+**其中：**
 
 {url:port｝表示nginx虚拟主机的访问地址，即域名或ip地址（推荐使用ip地址，域名有被劫持的危险），若端口不是默认的80，则还需要加上端口号；
 
 [path/to/] 表示相对于web根目录的子目录，以5.1的/var/www/html/mobgame 下的子目录 webapi为例，则地址是 http://{url:port}/webapi/install
+
+**注意：**若安装过程中出现为配置文件（/path/to/application/config/settings.php）赋予写权限失败的情况，请检查是否是SELinux限制了PHP的读写权限。
 
 六、接口使用
 ===========
